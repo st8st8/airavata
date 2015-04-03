@@ -1,1 +1,7 @@
-Django
+Django==1.8
+Pygments==2.0.1
+bpython==0.13.2
+coverage==3.7.1
+-e git://github.com/nanuxbe/django-jenkins.git@19a20905d1e852cb63316c8bbab5c42997dfb152#egg=django_jenkins
+factory-boy==2.5.1
+requests==2.5.1
