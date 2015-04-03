@@ -78,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'polla.wsgi.application'
+WSGI_APPLICATION = 'sample.wsgi.application'
 
 
 # Database
