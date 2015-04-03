@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='SiteAlias',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('domain', models.CharField(max_length=100, validators=[django.contrib.sites.models._simple_domain_name_validator], verbose_name='domain name alias')),
+                ('domain', models.CharField(max_length=100, verbose_name='domain name alias')),
                 ('site', models.ForeignKey(related_name='aliases', verbose_name='site', to='sites.Site')),
             ],
             options={

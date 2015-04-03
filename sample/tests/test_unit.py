@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.core.exceptions import ValidationError
 
 from mock import patch, Mock
 
@@ -24,3 +25,23 @@ class SiteAliasTest(TestCase):
     def testFindAliasHost(self):
         self._assert_site_is(self.first_alias.site.pk, self.first_alias.domain)
         self._assert_site_is(self.first_alias.site.pk, self.second_alias.domain)
+
+    def _assert_raise_error_for_domain(self, klass, **kwargs):
+        obj = klass.build(**kwargs)
+        self.assertRaises(ValidationError, obj.full_clean)
+
+    def _test_unique_domain_on_klass(self, klass, **kwargs):
+        for obj in [self.site, self.first_alias]:
+            kwargs['domain'] = obj.domain.upper()
+            self._assert_raise_error_for_domain(klass, **kwargs)
+
+    def testUniqueDomainsOnSite(self):
+        self._test_unique_domain_on_klass(SiteFactory)
+
+    def testUniqueDomainsOnSiteAlias(self):
+        self._test_unique_domain_on_klass(SiteAliasFactory, site=self.site)
+
+    def testUniqueDomainDoesntPreventUpdatingRecords(self):
+        for obj in [self.site, self.first_alias]:
+            obj.full_clean()
+            obj.save()
