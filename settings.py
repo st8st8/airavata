@@ -47,7 +47,7 @@ INSTALLED_APPS = (
 )
 
 PROJECT_APPS = (
-    'sample',
+    'test_app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sample.wsgi.application'
+WSGI_APPLICATION = 'test_app.wsgi.application'
 
 
 # Database

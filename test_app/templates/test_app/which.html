@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p>Current site is:</p>
+  <ul>
+    <li>Domain: {{ current_site.domain }}</li>
+    <li>ID: <span class="site_id">{{current_site.pk}}</span></li>
+  </ul>
+    
+{% endblock content %}

@@ -1,0 +1,14 @@
+
+<html>
+  <body>
+    <ul style="list-style-type: none;">
+      <li style="display: inline-block;"><a href="{% url 'homepage' %}">Home</a></li>
+      {% for page in site_pages %}
+        <li style="display: inline-block;" class="page"><a href="{% url 'page' page.slug %}">{{page.title}}</a></li>
+      {% endfor %}
+    </ul>
+    <hr/>
+    {% block content %}
+    {% endblock content %}
+  </body>
+</html>  

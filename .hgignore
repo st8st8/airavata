@@ -19,3 +19,4 @@ syntax: regexp
 .mo$
 \.sublime-project$
 \.sublime-workspace$
+^static/

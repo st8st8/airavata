@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{page.title}}</h1>
+  {{page.body|safe}}
+  <hr/>
+  <small>Page id is: <span class="page_id">{{page.pk}}</span></small>
+{% endblock content %}
+
