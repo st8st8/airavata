@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 from mock import patch, Mock
 
-from .factories import SiteFactory, SiteAliasFactory
+from .factories import SiteFactory, SiteAliasFactory, PageFactory
 
 
 class SiteAliasTest(TestCase):
@@ -45,3 +45,9 @@ class SiteAliasTest(TestCase):
         for obj in [self.site, self.first_alias]:
             obj.full_clean()
             obj.save()
+
+
+class Pagetest(TestCase):
+
+    def testModel(self):
+        page = PageFactory()
