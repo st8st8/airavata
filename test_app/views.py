@@ -1,6 +1,8 @@
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView, ListView
 from django.views.generic.base import ContextMixin
 from django.contrib.sites.shortcuts import get_current_site
+
+from polla.views import SiteFilteredViewMixin
 
 from .models import Page
 
@@ -13,19 +15,16 @@ class PageListViewMixin(ContextMixin):
         return context
 
 
-class PageView(PageListViewMixin, DetailView):
+class PageView(SiteFilteredViewMixin, PageListViewMixin, DetailView):
 
     template_name = 'test_app/page.html'
     model = Page
 
-    def get_queryset(self):
-        qs = super(PageView, self).get_queryset()
-        return qs.filter(site=get_current_site(self.request))
 
-
-class WhichSite(PageListViewMixin, TemplateView):
+class WhichSite(PageListViewMixin, ListView):
 
     template_name = 'test_app/which.html'
+    model = Page
 
     def get_context_data(self, **kwargs):
         context = super(WhichSite, self).get_context_data(**kwargs)

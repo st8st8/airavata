@@ -6,5 +6,11 @@
     <li>Domain: {{ current_site.domain }}</li>
     <li>ID: <span class="site_id">{{current_site.pk}}</span></li>
   </ul>
-    
+  <hr/>
+  <p>Pages on this site:</p>
+  <ul>
+    {% for page in page_list %}
+        <li>{{page.title}}</li>
+    {% endfor %}
+  </ul>
 {% endblock content %}
