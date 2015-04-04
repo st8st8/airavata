@@ -10,7 +10,7 @@
 db.sqlite3
 # environ.py should not be versionned since it contains environment specific settings
 syntax: regexp
-^venv/
+^venv
 ^.idea/
 ^tags$
 ^reports/

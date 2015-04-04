@@ -1,3 +1,6 @@
+from __future__ import unicode_literals
+import six
+
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
@@ -28,9 +31,14 @@ class PageSiteTest(WebTest):
         cls.hello_b = PageFactory.create(title='Hello', site=cls.site_b)
 
     def _test_site_id(self, site, content):
-        self.assertRegex(content.decode(), 'class="site_id">{}<\/span'.format(site.pk))
+        if six.PY2:
+            self.assertRegexpMatches(content.decode(), 'class="site_id">{}<\/span'.format(site.pk))
+        else:
+            self.assertRegex(content.decode(), 'class="site_id">{}<\/span'.format(site.pk))
 
     def _test_site(self, site, domain, should_pass=True):
+        if six.PY2:
+            domain = str(domain)
         if should_pass:
             response = self.app.get(reverse('homepage'), extra_environ={'HTTP_HOST': domain})
 
@@ -59,6 +67,8 @@ class PageSiteTest(WebTest):
         self._test_site(None, 'brol', False)
 
     def _assert_page_count(self, domain, count):
+        if six.PY2:
+            domain = str(domain)
         response = self.app.get(reverse('homepage'), extra_environ={'HTTP_HOST': domain})
         self.assertEqual(response.status_code, 200)
 
@@ -73,12 +83,18 @@ class PageSiteTest(WebTest):
             self._assert_page_count(domain, count)
 
     def _assert_page_id(self, domain, page_slug, page_id):
+        if six.PY2:
+            domain = str(domain)
         response = self.app.get(reverse('page', kwargs={'slug': page_slug}),
             extra_environ={'HTTP_HOST': domain})
         self.assertEqual(response.status_code, 200)
 
-        self.assertRegex(response.content.decode(),
-            'class="page_id">{}<\/span'.format(page_id))
+        if six.PY2:
+            self.assertRegexpMatches(response.content.decode(),
+                'class="page_id">{}<\/span'.format(page_id))
+        else:
+            self.assertRegex(response.content.decode(),
+                'class="page_id">{}<\/span'.format(page_id))
 
     def testSiteFilteredViewMixinSameSlug(self):
         for site, page in [
@@ -89,12 +105,21 @@ class PageSiteTest(WebTest):
             self._assert_page_id(site.domain, page.slug, page.pk)
 
     def testSiteFilteredViewMixinPagesStayOnTheirSite(self):
+        if six.PY2:
+            domain_a = str(self.site_a.domain)
+            domain_b = str(self.site_b.domain)
+            alias_b = str(self.alias_b.domain)
+        else:
+            domain_a = self.site_a.domain
+            domain_b = self.site_b.domain
+            alias_b = self.alias_b.domain
+
         response = self.app.get(reverse('page', kwargs={'slug': self.hello_world.slug}),
-            extra_environ={'HTTP_HOST': self.site_a.domain})
+            extra_environ={'HTTP_HOST': domain_a})
         self.assertEqual(response.status_code, 200)
         response = self.app.get(reverse('page', kwargs={'slug': self.hello_world.slug}),
-            extra_environ={'HTTP_HOST': self.site_b.domain}, status=404)
+            extra_environ={'HTTP_HOST': domain_b}, status=404)
         self.assertEqual(response.status_code, 404)
         response = self.app.get(reverse('page', kwargs={'slug': self.hello_world.slug}),
-            extra_environ={'HTTP_HOST': self.alias_b.domain}, status=404)
+            extra_environ={'HTTP_HOST': alias_b}, status=404)
         self.assertEqual(response.status_code, 404)
