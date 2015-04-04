@@ -21,9 +21,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'dbrb&bcl4ns(11y9y@0i%d(%ay=eq)+px#n^@_e8isq%e#)&qz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+from polla.utils import AllowedSites
+ALLOWED_HOSTS = AllowedSites()
 
 
 # Application definition
