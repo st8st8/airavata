@@ -6,6 +6,8 @@ Python 3.4 [![Build Status](http://jenkins.lasolution.be/buildStatus/icon?job=Po
 
 
 Docs [![Docs status](https://readthedocs.org/projects/django-polla/badge/?version=latest)](https://readthedocs.org/projects/django-polla/badge/?version=latest)
+PyPi [![PyPi version](https://pypip.in/v/polla/badge.png)](https://crate.io/packages/polla/)
+[![PyPi downloads](https://pypip.in/d/polla/badge.png)](https://crate.io/packages/polla/)
 
 
 Polla (πολλά - in Greek "lots of / multi") is a Django 1.8+ library that allows you to hosts multiple dynamic sites running on a single Django instance/db.
