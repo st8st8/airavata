@@ -17,14 +17,14 @@ I have been using a customized version of [dynamicsites](https://bitbucket.org/u
 ### Configure
 Add `polla` and `django.contrib.sites` to your installed apps
 
-<pre>
+```
 ## settings.py
 INSTALLED_APPS = [
     ...
     'django.contrib.sites',
     'polla',
 ]
-</pre>
+```
 
 _Make sure SITE_ID in not set in_ `settings.py`
 
@@ -34,11 +34,11 @@ Polla provides two wrapper classes to fetch `ALLOWED_HOSTS` from the database in
 These two classes were largely inspired by (read mostly copied from) [kezabelle's django-allowedsites](https://github.com/kezabelle/django-allowedsites).
 Namely they are `polla.utils.AllowedSites` and `polla.utils.CachedAllowedSites`. Use either of those in your settings.py
 
-<pre>
+```
 ## settings.py
 from polla.utils import CachedAllowedSites
 ALLOWED_HOSTS = CachedAllowedSites()
-</pre>
+```
 
 ### Set the domain for your primary site
 
@@ -66,7 +66,7 @@ Polla provides a mixin for filtering views. Originally `SingleObjectMixin` and `
 
 `SiteFilteredViewMixin` filters `get_queryset` by the current site. By default `SiteFilteredViewMixin` looks for a `site` field but you can override with the `site_field` parameter.
 
-<pre>
+```
 from django.views.generic import DetailView, ListView
 from polla.views import SiteFilteredViewMixin
 
@@ -82,7 +82,7 @@ class MyModelDetailView(SiteFilteredViewMixin, DetailView):
 
   model = MyModel
   site_field = 'base_site'
-</pre>
+```
 
 
 ## Extras
