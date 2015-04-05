@@ -17,14 +17,14 @@ I have been using a customized version of [dynamicsites](https://bitbucket.org/u
 ### Configure
 Add `polla` and `django.contrib.sites` to your installed apps
 
-<pre>
+```
 ## settings.py
 INSTALLED_APPS = [
     ...
     'django.contrib.sites',
     'polla',
 ]
-</pre>
+```
 
 _Make sure SITE_ID in not set in_ `settings.py`
 
