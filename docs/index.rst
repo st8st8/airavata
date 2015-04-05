@@ -17,7 +17,7 @@ Getting started
 Install
 -------
 
-``pip install django_polla``
+``pip install polla``
 
 Configure
 ~~~~~~~~~

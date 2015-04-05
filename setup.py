@@ -10,23 +10,27 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='polla',
     version='0.9',
-    packages=['polla'],
+    packages=['polla', 'polla.management.commands'],
     include_package_data=True,
-    license='MIT License',  # example license
-    description='Package description',
+    license='BSD License',
+    description='Multiple dynamic sistes with Django',
     long_description=README,
-    url='<package homepage>',
-    author='<your name>',
-    author_email='<your email>',
+    url='http://bb.levit.be/djang-polla',
+    author='Levit SCS',
+    author_email='emma@levit.be',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License', # example license
+        'License :: OSI Approved :: BSD License', # example license
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         # Replace these appropriately if you are stuck on Python 2.
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',

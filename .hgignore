@@ -21,3 +21,5 @@ syntax: regexp
 \.sublime-workspace$
 ^static/
 ^docs/_build
+^dist/
+^polla.egg-info/
