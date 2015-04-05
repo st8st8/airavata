@@ -20,3 +20,4 @@ syntax: regexp
 \.sublime-project$
 \.sublime-workspace$
 ^static/
+^docs/_build
