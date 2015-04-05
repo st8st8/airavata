@@ -2,11 +2,12 @@ from __future__ import unicode_literals
 import six
 
 from django.core.urlresolvers import reverse
-from django.conf import settings
+from django.http.request import validate_host
+
+from polla.utils import AllowedSites
 
 from django_webtest import WebTest
 
-from django.contrib.sites.models import Site
 from .factories import SiteFactory, SiteAliasFactory, PageFactory
 
 
@@ -39,6 +40,9 @@ class PageSiteTest(WebTest):
     def _test_site(self, site, domain, should_pass=True):
         if six.PY2:
             domain = str(domain)
+
+        self.assertEqual(validate_host(domain.lower(), AllowedSites()), should_pass)
+
         if should_pass:
             response = self.app.get(reverse('homepage'), extra_environ={'HTTP_HOST': domain})
 
@@ -49,13 +53,6 @@ class PageSiteTest(WebTest):
             ## Testing the correct site is returned
             self.assertEqual(response.status_code, 200)
             self._test_site_id(site, response.content)
-        else:
-            ## Testing ALLOWED_HOSTS
-            ## Test server does not enforce ALLOWED_HOSTS so we will be checking
-            ## For Site.DoesNotExist instead
-            self.assertRaises(Site.DoesNotExist,
-                    self.app.get, reverse('homepage'), extra_environ={'HTTP_HOST': domain}
-            )
 
     def testSite(self):
         for site, domain in [
