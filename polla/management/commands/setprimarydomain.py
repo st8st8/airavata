@@ -9,7 +9,7 @@ from ...models import SiteAlias
 
 
 class Command(BaseCommand):
-    help = 'Sets the primary domain name (and optionnally localhost alias'
+    help = 'Sets the primary domain name (and optionnally localhost alias)'
 
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
@@ -17,6 +17,11 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('domain_name', nargs='?', type=str, default='')
+        parser.add_argument('--noinput', action='store_false', dest='interactive', default=True,
+            help='Tells Django to NOT prompt the user for input of any kind.')
+        parser.add_argument('--localhost-alias', dest='do_alias',
+            default=None, action='store_true',
+            help='Create localhost alias if localhost is not configured')
 
     def get_input_data(self, field, message, default=None):
         raw_value = input(message)
@@ -31,9 +36,12 @@ class Command(BaseCommand):
         return val
 
     def handle(self, **options):
-        domain = options.get('domaine_name', None)
-        while domain is None or domain == '':
-            domain = self.get_input_data(self.domain_field, 'Enter the main domain name [localhost]: ', 'localhost')
+        domain = options.get('domain_name', None)
+        if options.get('interactive', True):
+            while domain is None or domain == '':
+                domain = self.get_input_data(self.domain_field, 'Enter the main domain name [localhost]: ', 'localhost')
+        elif domain is None or domain == '':
+            raise CommandError('Please supply a domain name when using --noinput')
 
         # Try to find the default example.com
         # Fallback to the first site created or None
@@ -55,14 +63,13 @@ class Command(BaseCommand):
             found = Site.objects.filter(Q(domain__iexact='localhost') |
                 Q(aliases__domain__iexact='localhost')).count()
             if found == 0:
-                do_create = None
-                while do_create is None:
-                    do_create = input('No site found for loclhost would you like to create and alias? [y/N] ')
-                    if do_create.lower() not in 'yn' and do_create != '':
-                        do_create = None
-                    else:
-                        do_create = do_create.lower()
-                if do_create == 'y':
+                do_alias = options.get('do_alias', None)
+                if do_alias is None and options.get('interactive', True):
+                    while do_alias is None:
+                        do_create = input('No site found for loclhost would you like to create and alias? [y/N] ')
+                        if do_create.lower() in 'yn':
+                            do_alias = True if do_create.lower() else False
+                if do_alias is not None and do_alias:
                     SiteAlias.objects.create(site=site, domain='localhost')
 
         self.stdout.write('Successfully updated site "{}"'.format(site))
