@@ -5,9 +5,12 @@ Python 3.2 [![Build Status](http://jenkins.lasolution.be/buildStatus/icon?job=Po
 Python 3.4 [![Build Status](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=CPython-3.4)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=CPython-3.4/)
 
 
+Docs [![Docs status](https://readthedocs.org/projects/django-polla/badge/?version=latest)
+
+
 Polla (πολλά - in Greek "lots of / multi") is a Django 1.8+ library that allows you to hosts multiple dynamic sites running on a single Django instance/db.
 
-I have been using a customized version of [dynamicsites](https://bitbucket.org/uysrc/django-dynamicsites/overview) for a while now. But with the new features form Django 1.7 and 1.8, there exists another simpler, and more pythonesque IMHO, way to achieve the same results. Polla is an attempt at that *other* way.
+I have been using a customized version of [dynamicsites](https://bitbucket.org/uysrc/django-dynamicsites/overview) for a while now. But with the new features from Django 1.7 and 1.8, there exists another simpler, and more pythonesque IMHO, way to achieve the same results. Polla is an attempt at that *other* way.
 
 ## Getting started
 ### Install
@@ -36,9 +39,34 @@ Namely they are `polla.utils.AllowedSites` and `polla.utils.CachedAllowedSites`.
 
 ```
 ## settings.py
-from polla.utils import CachedAllowedSites
-ALLOWED_HOSTS = CachedAllowedSites()
+from polla.utils import AllowedSites
+ALLOWED_HOSTS = AllowedSites()
 ```
+
+#### Cache invalidation
+
+If you are planning on using CachedAllowedSites, don't forget to register cache invalidation signals in your [AppConfig](https://docs.djangoproject.com/en/1.8/ref/applications/#django.apps.AppConfig.ready).
+
+```
+## apps.py
+from django.apps import AppConfig
+from polla.utils import register_signals
+
+class MyAppConfig(AppConfig):
+  name = 'my_app'
+  verbose_name = "My app"
+
+  def ready(self):
+        from django.contrib.sites.models import Site
+        from polla.models import SiteAlias
+        for model in [Site, SiteAlias]:
+            register_signals(model)
+
+## __init__.py
+default_app_config = 'my_app.apps.MyAppConfig'
+```
+
+Also note that cache is supposed to be shared among Django instances in order for this process to work. Read [more about cache](https://docs.djangoproject.com/en/1.8/topics/cache/#setting-up-the-cache)
 
 ### Set the domain for your primary site
 

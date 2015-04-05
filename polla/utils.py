@@ -193,3 +193,12 @@ class CachedAllowedSites(Sites):
         *at this moment*
         """
         cls()._set_cached_sites(**kwargs)
+
+
+## Cache invalidation
+
+def register_signals(model):
+    from django.db.models.signals import post_save, post_delete
+    post_save.connect(CachedAllowedSites.update_cache, sender=model, dispatch_uid='update_allowedsites')
+    post_delete.connect(CachedAllowedSites.update_cache, sender=model, dispatch_uid='update_allowedsites')
+
