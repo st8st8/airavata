@@ -1,8 +1,21 @@
+from __future__ import unicode_literals
+
+from django.apps import apps
 from django.contrib.sites.models import SITE_CACHE
 from django.db.models import Q
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.http.request import split_domain_port
+from django.conf import settings
+from .exceptions import NoRequestFound
 
+
+
+def load_settings(app_settings):
+    for app_setting in dir(app_settings):
+        ## only import settings, not imported modules or methods
+        set_settings = dir(settings)
+        if app_setting == app_setting.upper() and app_setting not in set_settings:
+            setattr(settings, app_setting, getattr(app_settings, app_setting))
 
 ## Model Validation
 
@@ -32,13 +45,44 @@ def _get_host(request):
     return domain_host
 
 
-def _get_site_by_request(self, request):
+def _get_site_by_request(self, request=None):
+    if request is None:
+        if 'threadlocals.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+            from threadlocals.threadlocals import get_current_request
+            request = get_current_request()
+        else:
+            raise ImproperlyConfigured("You should either provide a request or install threadlocals")
+    if request is None:
+        raise NoRequestFound("No request was provided nor could it be retrieved")
     host = _get_host(request)
     # Looking for domain in django.contib.site.Site and polla.SiteAlias
     if host not in SITE_CACHE:
       site = self.get(Q(domain__iexact=host) | Q(aliases__domain__iexact=host))
       SITE_CACHE[host] = site
     return SITE_CACHE[host]
+
+
+def get_current_site(request=None):
+    if apps.is_installed('django.contrib.sites'):
+        from .models import Site
+        if not hasattr(settings, 'SITE_ID') and request is None:
+            return _get_site_by_request(Site.objects, request)
+        else:
+            return Site.objects.get_current(request)
+    else:
+        from django.contrib.sites.requests import RequestSite
+        return RequestSite(request)
+
+
+## Loaders
+
+
+def get_current_path(request=None):
+    site = get_current_site(request)
+    path = site.domain
+    if settings.POLLA_REPLACE_DOTS_IN_DOMAINS:
+        path = path.replace('.', '_')
+    return path
 
 
 ## Allowed hosts - adapted from https://github.com/kezabelle/django-allowedsites

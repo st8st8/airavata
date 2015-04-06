@@ -7,8 +7,17 @@ class PollaAppConfig(AppConfig):
     verbose_name = 'Polla'
 
     def ready(self):
-        from .utils import _get_site_by_request, domain_available
+        from .utils import _get_site_by_request, domain_available, load_settings
+        from . import settings as polla_settings
         from django.contrib.sites.models import SiteManager, Site
+
+        load_settings(polla_settings)
+
+        from django.conf import settings
+        if 'threadlocals.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+            from .utils import get_current_site
+            from django.contrib.sites import shortcuts
+            shortcuts.get_current_site = get_current_site
 
         SiteManager._get_site_by_request = _get_site_by_request
 

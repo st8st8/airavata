@@ -12,3 +12,4 @@ requests==2.5.1
 six==1.9.0
 waitress==0.8.9
 -e git+git://github.com/kmmbvnr/django-jenkins.git#egg=django-jenkins
+django-threadlocals==0.7.2
