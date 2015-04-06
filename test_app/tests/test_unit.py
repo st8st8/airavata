@@ -6,7 +6,7 @@ from polla.utils import get_domain_path
 from polla.templatetags.sitestatic import static
 from polla.staticfiles_finder import SiteFinder
 
-from mock import patch, Mock
+from mock import patch, MagicMock as Mock
 
 from .factories import SiteFactory, SiteAliasFactory, PageFactory
 
@@ -71,12 +71,12 @@ class UtilsTest(TestCase):
 class TemplateTagsTest(TestCase):
 
     def test_specific_path_exists(self):
-        with patch('polla.utils.get_domain_path', Mock(return_value='example.com')):
+        with patch('polla.utils.get_domain_path', Mock(return_value='example.com')), patch('polla.utils.get_current_site', Mock(return_value=SiteFactory.build())):
             self.assertEqual('/static/example.com/css/site.css', static('css/site.css'))
             self.assertEqual('/static/dummy.txt', static('dummy.txt'))
 
     def test_specific_path_doesnt_exist(self):
-        with patch('polla.utils.get_domain_path', Mock(return_value='brol.net')):
+        with patch('polla.utils.get_domain_path', Mock(return_value='brol.net')), patch('polla.utils.get_current_site', Mock(return_value=SiteFactory.build())):
             self.assertEqual('/static/dummy.txt', static('dummy.txt'))
             self.assertEqual('/static/css/site.css', static('css/site.css'))
 
