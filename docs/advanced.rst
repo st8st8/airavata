@@ -7,6 +7,13 @@ Advanced usage
 .. danger::
     These advanced usages all require to resort to *local threads* to be able to access the current request. Some people have `strong feeelings against local threads use in Django <https://groups.google.com/forum/?fromgroups=#!topic/django-users/5681nX0YPgQ>`_. Local threads in themselves (in our humble opinion) are not a security risk but may amplify some other security risks. So before you use them, make sure you know what you are getting into.
 
+Extra requirement
+-----------------
+
+As said above threadlocals is an extra requirement for the advanced features, so go ahead and pip install it
+::
+    pip install django-threadlocals
+
 Common Settings
 ---------------
 
@@ -17,7 +24,6 @@ To use any of the following features, make sure you enable the `LocalThreadMiddl
         ...
         'polla.middleware.ThreadLocalMiddleware',
     )
-
 
 
 POLLA_SITES_DIR
