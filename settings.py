@@ -47,7 +47,7 @@ INSTALLED_APPS = (
 )
 
 PROJECT_APPS = (
-    'test_app',
+    'polla',
 )
 
 MIDDLEWARE_CLASSES = (
