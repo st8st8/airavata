@@ -21,7 +21,6 @@ class StaticFilesNode(StaticNode):
 
     def url(self, context):
         path = self.path.resolve(context)
-        print("Path is -> {}".format(path))
         return static(path)
 
 
