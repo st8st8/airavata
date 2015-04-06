@@ -6,9 +6,9 @@
 Welcome to Django Polla's documentation!
 ========================================
 
-.. |status27| image:: http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-2.7
-.. |status32| image:: http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-3.2
-.. |status34| image:: http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=CPython-3.4
+.. |status27| image:: http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-2.7&build=39
+.. |status32| image:: http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-3.2&build=39
+.. |status34| image:: http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=CPython-3.4&build=39
 .. |docs| image:: https://readthedocs.org/projects/django-polla/badge/?version=latest
 .. |pypiv| image:: https://pypip.in/v/polla/badge.png
 .. |pypid| image:: https://pypip.in/d/polla/badge.png
