@@ -81,10 +81,7 @@ StaticFile Finder
 
 Polla provides a StaticFile Finder to allow you to host site specific static files (js, css, img, etc).
 
-Site specific should be hosted under ``sites/<main domain name>/static/<main domain name>``
-
-.. warning
-    This will probably change in V0.9.1, the second ``<main domain name>`` will likely get dropped
+Site specific should be located under ``sites/<main domain name>/static/<file path>`` and they will be served under ``<STATIC_ROOT>/<main domain name>/<file path>``
 
 To enable Polla's StaticFile Finder, you have to make the following changes to your settings.py:
 ::
@@ -98,6 +95,11 @@ To enable Polla's StaticFile Finder, you have to make the following changes to y
     )
 
 With this setting, ``collectstatic`` will collect files in ``sites/<domain name>`` for every domain listed in ``Site``
+
+.. warning::
+    Using this method will, by default, expose static files of **every** ``Site`` to **any** ``Site`` running under the same Django project.
+    e.g: ``css/site.css`` sprcific to ``site-a.com`` wil be available on ``http://site-a.com/static/site-a.com/css/site.css`` as well as on ``http://site-b.com/static/site-a.com/css/site.css`` (provided ``site-b.com`` runs under the same django project).
+    This side-effect might not be desirable and may be prevented using a clever configuration on your web server.
 
 sitestatic templatetags library
 -------------------------------

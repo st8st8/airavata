@@ -2,6 +2,10 @@ from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 
+from polla.utils import get_domain_path
+from polla.templatetags.sitestatic import static
+from polla.staticfiles_finder import SiteFinder
+
 from mock import patch, Mock
 
 from .factories import SiteFactory, SiteAliasFactory, PageFactory
@@ -50,4 +54,40 @@ class SiteAliasTest(TestCase):
 class Pagetest(TestCase):
 
     def testModel(self):
-        page = PageFactory()
+        PageFactory()
+
+
+class UtilsTest(TestCase):
+
+    def test_dont_replace_dots_get_domain_path(self):
+        with self.settings(POLLA_REPLACE_DOTS_IN_DOMAINS=False):
+            self.assertEqual(get_domain_path('exAmple.com'), 'example.com')
+
+    def test_replace_dots_get_domain_path(self):
+        with self.settings(POLLA_REPLACE_DOTS_IN_DOMAINS=True):
+            self.assertEqual(get_domain_path('exAmple.com'), 'example_com')
+
+
+class TemplateTagsTest(TestCase):
+
+    def test_specific_path_exists(self):
+        with patch('polla.utils.get_domain_path', Mock(return_value='example.com')):
+            self.assertEqual('/static/example.com/css/site.css', static('css/site.css'))
+            self.assertEqual('/static/dummy.txt', static('dummy.txt'))
+
+    def test_specific_path_doesnt_exist(self):
+        with patch('polla.utils.get_domain_path', Mock(return_value='brol.net')):
+            self.assertEqual('/static/dummy.txt', static('dummy.txt'))
+            self.assertEqual('/static/css/site.css', static('css/site.css'))
+
+
+class StaticFileFinderTest(TestCase):
+
+    def test_it(self):
+        finder = SiteFinder()
+
+        rs = finder.find('example.com/css/site.css')
+        self.assertNotEqual(rs, [])
+
+        rs = finder.find('css/site.css')
+        self.assertEqual(rs, [])
