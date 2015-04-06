@@ -25,4 +25,3 @@ class SiteFinder(FileSystemFinder):
             filesystem_storage.prefix = prefix
             self.storages[root] = filesystem_storage
         BaseFinder.__init__(self, *args, **kwargs)
-

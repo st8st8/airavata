@@ -1,4 +1,8 @@
+{% load sitestatic %}
 <html>
+  <head>
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  </head>
   <body>
     <ul style="list-style-type: none;">
       <li style="display: inline-block;"><a href="{% url 'homepage' %}">Home</a></li>
