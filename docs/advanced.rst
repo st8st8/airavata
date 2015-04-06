@@ -10,7 +10,7 @@ Advanced usage
 Extra requirement
 -----------------
 
-As said above threadlocals is an extra requirement for the advanced features, so go ahead and pip install it
+As said above ``threadlocals`` is an extra requirement for the advanced features, so go ahead and pip install it
 ::
     pip install django-threadlocals
 
