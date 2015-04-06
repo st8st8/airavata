@@ -34,6 +34,7 @@ Content:
    
    about
    getting_started
+   advanced
    models
    views
    contributing
