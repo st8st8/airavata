@@ -78,13 +78,15 @@ def get_current_site(request=None):
 
 ## Loaders
 
+def get_domain_path(domain):
+    if settings.POLLA_REPLACE_DOTS_IN_DOMAINS:
+        domain = domain.replace('.', '_')
+    return domain.lower()
+
 
 def get_current_path(request=None):
     site = get_current_site(request)
-    path = site.domain
-    if settings.POLLA_REPLACE_DOTS_IN_DOMAINS:
-        path = path.replace('.', '_')
-    return path.lower()
+    return get_domain_path(site.domain)
 
 
 ## Allowed hosts - adapted from https://github.com/kezabelle/django-allowedsites
