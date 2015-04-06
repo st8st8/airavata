@@ -40,12 +40,7 @@ def domain_available(obj, site_klass):
 
 ## AppConfig
 
-def _get_host(request):
-    domain_host, domain_port = split_domain_port(request.get_host())
-    return domain_host
-
-
-def _get_site_by_request(self, request=None):
+def _get_host(request=None):
     if request is None:
         if 'threadlocals.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
             from threadlocals.threadlocals import get_current_request
@@ -54,6 +49,11 @@ def _get_site_by_request(self, request=None):
             raise ImproperlyConfigured("You should either provide a request or install threadlocals")
     if request is None:
         raise NoRequestFound("No request was provided nor could it be retrieved")
+    domain_host, domain_port = split_domain_port(request.get_host())
+    return domain_host
+
+
+def _get_site_by_request(self, request=None):
     host = _get_host(request)
     # Looking for domain in django.contib.site.Site and polla.SiteAlias
     if host not in SITE_CACHE:
