@@ -59,7 +59,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'threadlocals.middleware.ThreadLocalMiddleware',
+    ## FIXME: https://github.com/nebstrebor/django-threadlocals/pull/2
+    # 'threadlocals.middleware.ThreadLocalMiddleware',
+    'polla.middleware.ThreadLocalMiddleware',
 )
 
 ROOT_URLCONF = 'urls'

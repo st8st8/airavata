@@ -42,7 +42,9 @@ def domain_available(obj, site_klass):
 
 def _get_host(request=None):
     if request is None:
-        if 'threadlocals.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+        ## FIXME: https://github.com/nebstrebor/django-threadlocals/pull/2
+        # if 'threadlocals.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+        if 'polla.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
             from threadlocals.threadlocals import get_current_request
             request = get_current_request()
         else:
