@@ -4,7 +4,9 @@
 
 from threadlocals.threadlocals import set_thread_variable
 
+
 class ThreadLocalMiddleware(object):
+
     """Middleware that puts the request object in thread local storage."""
 
     def process_request(self, request):
