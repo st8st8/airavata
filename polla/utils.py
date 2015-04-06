@@ -84,7 +84,7 @@ def get_current_path(request=None):
     path = site.domain
     if settings.POLLA_REPLACE_DOTS_IN_DOMAINS:
         path = path.replace('.', '_')
-    return path
+    return path.lower()
 
 
 ## Allowed hosts - adapted from https://github.com/kezabelle/django-allowedsites

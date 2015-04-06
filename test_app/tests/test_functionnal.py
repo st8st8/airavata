@@ -3,6 +3,7 @@ import six
 
 from django.core.urlresolvers import reverse
 from django.http.request import validate_host
+from django.contrib.sites.models import Site
 
 from polla.utils import AllowedSites
 
@@ -120,3 +121,41 @@ class PageSiteTest(WebTest):
         response = self.app.get(reverse('page', kwargs={'slug': self.hello_world.slug}),
             extra_environ={'HTTP_HOST': alias_b}, status=404)
         self.assertEqual(response.status_code, 404)
+
+
+class TemplateLoaderTest(WebTest):
+
+    @classmethod
+    def setUpTestData(cls):
+        test_domain_name = 'example.com'
+        try:
+            cls.edc = Site.objects.get(domain=test_domain_name)
+        except Site.DoesNotExist:
+            cls.edc = SiteFactory.create(domain=test_domain_name)
+        except Site.MultipleObjectsReturned:
+            cls.edc = Site.objects.filter(domain=test_domain_name).first()
+            Site.objects.filter(domain=test_domain_name).exclude(pk=cls.edc.pk).delete()
+
+        cls.edc_alias = SiteAliasFactory.create(site=cls.edc)
+        cls.other = SiteFactory.create()
+        cls.other_alias = SiteAliasFactory.create(site=cls.other)
+
+    def test_specific_site_finds_custom_template(self):
+        for site in (self.edc, self.edc_alias):
+            if six.PY2:
+                domain = str(site.domain)
+            else:
+                domain = site.domain
+
+            response = self.app.get(reverse('homepage'), extra_environ={'HTTP_HOST': domain})
+            self.assertContains(response, 'CustomTemplate')
+
+    def test_generic_site_finds_generic_template(self):
+        for site in (self.other, self.other_alias):
+            if six.PY2:
+                domain = str(site.domain)
+            else:
+                domain = site.domain
+
+            response = self.app.get(reverse('homepage'), extra_environ={'HTTP_HOST': domain})
+            self.assertNotContains(response, 'CustomTemplate')
