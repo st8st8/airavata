@@ -18,9 +18,9 @@ Features
 ToDo
 ----
 
-* allow different name_based urlpatterns to be applied depending on the requested host
-* allow to use a different set of temples depending on the requested host
-* allow serving different static files depending on the requested host
+* dependency django-allowedsites
+* dependency django-threadlocals
+* improve test coverage
 * improve this doc
 
 
