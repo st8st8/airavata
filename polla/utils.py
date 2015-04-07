@@ -12,7 +12,7 @@ except ImportError:
     try:
         from cache import LruCache as lru_cache
     except ImportError:
-        from django.utils import lru_cache
+        from django.utils.lru_cache import lru_cache
 
 from .exceptions import NoRequestFound
 
@@ -260,7 +260,7 @@ def register_signals(model):
 
 ## Resolver
 
-@lru_cache.lru_cache(maxsize=None)
+@lru_cache(maxsize=None)
 def get_resolver_for_site(urlconf, site):
     from django.core.urlresolvers import RegexURLResolver
     if urlconf is None:
@@ -273,7 +273,7 @@ def get_resolver(urlconf):
     return get_resolver_for_site(urlconf, current_site)
 
 
-@lru_cache.lru_cache(maxsize=None)
+@lru_cache(maxsize=None)
 def get_ns_resolver_for_site(ns_pattern, resolver, site):
     from django.core.urlresolvers import RegexURLResolver
     ns_resolver = RegexURLResolver(ns_pattern, resolver.url_patterns)
