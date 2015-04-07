@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
+
 
 from polla.utils import get_domain_path
 from polla.templatetags.sitestatic import static
@@ -71,12 +73,12 @@ class UtilsTest(TestCase):
 class TemplateTagsTest(TestCase):
 
     def test_specific_path_exists(self):
-        with patch('polla.utils.get_domain_path', Mock(return_value='example.com')), patch('polla.utils.get_current_site', Mock(return_value=SiteFactory.build())):
-            self.assertEqual('/static/example.com/css/site.css', static('css/site.css'))
+        with patch('polla.utils.get_domain_path', Mock(return_value='example_com')), patch('polla.utils.get_current_site', Mock(return_value=SiteFactory.build())):
+            self.assertEqual('/static/example_com/css/site.css', static('css/site.css'))
             self.assertEqual('/static/dummy.txt', static('dummy.txt'))
 
     def test_specific_path_doesnt_exist(self):
-        with patch('polla.utils.get_domain_path', Mock(return_value='brol.net')), patch('polla.utils.get_current_site', Mock(return_value=SiteFactory.build())):
+        with patch('polla.utils.get_domain_path', Mock(return_value='brol_net')), patch('polla.utils.get_current_site', Mock(return_value=SiteFactory.build())):
             self.assertEqual('/static/dummy.txt', static('dummy.txt'))
             self.assertEqual('/static/css/site.css', static('css/site.css'))
 
@@ -86,8 +88,30 @@ class StaticFileFinderTest(TestCase):
     def test_it(self):
         finder = SiteFinder()
 
-        rs = finder.find('example.com/css/site.css')
+        rs = finder.find('example_com/css/site.css')
         self.assertNotEqual(rs, [])
 
         rs = finder.find('css/site.css')
         self.assertEqual(rs, [])
+
+
+class UrlsTest(TestCase):
+
+    def test_defaults(self):
+        with patch('polla.utils.get_current_path', Mock(return_value='brol_net')):
+            home_url = reverse('homepage')
+            self.assertEqual(home_url, '/')
+
+    # def test_url_patterns_length(self):
+    #     from sites.example_com.urls import urlpatterns as specific_patterns
+    #     with patch('polla.utils.get_current_path', Mock(return_value='example_com')):
+    #         from urls import urlpatterns
+    #         self.assertEqual(len(urlpatterns), len(specific_patterns) + 1)
+
+    def test_specific(self):
+        with patch('polla.utils.get_current_path', Mock(return_value='example_com')):
+            from urls import urlpatterns
+            home_url = reverse('homepage')
+            self.assertEqual(home_url, '/')
+            test_a_url = reverse('test-a')
+            self.assertEqual(test_a_url, '/test/a.html')

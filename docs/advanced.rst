@@ -17,12 +17,14 @@ As said above ``threadlocals`` is an extra requirement for the advanced features
 Common Settings
 ---------------
 
-To use any of the following features, make sure you enable the `LocalThreadMiddleware`.
+To use any of the following features, make sure you enable the `LocalThreadMiddleware` (put it before ``django.middleware.common.CommonMiddleware``.
 ::
     ##settings.py
     MIDDLEWARE_CLASSES = (
-        ...
         'polla.middleware.ThreadLocalMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        ...
     )
 
 
@@ -34,7 +36,7 @@ Every site-specific feature (template, urls, static file) is hosted under a main
 POLLA_REPLACE_DOTS_IN_DOMAINS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This setting is set to ``False`` by default. For people wanting to use Polla as or drop-in replacement for ``dynamicsites``, you shoud set it tu ``True``.
+This setting is set to ``False`` by default. For people wanting to use Polla as or drop-in replacement for ``dynamicsites`` or would like to use the Urls feature, you shoud set it tu ``True``.
 
 Setting ``POLLA_REPLACE_DOTS_IN_DOMAINS`` will change the default behaviour when it comes to looking for site specific features.
 

@@ -51,6 +51,10 @@ PROJECT_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    ## FIXME: https://github.com/nebstrebor/django-threadlocals/pull/2
+    # 'threadlocals.middleware.ThreadLocalMiddleware',
+    'polla.middleware.ThreadLocalMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,9 +63,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    ## FIXME: https://github.com/nebstrebor/django-threadlocals/pull/2
-    # 'threadlocals.middleware.ThreadLocalMiddleware',
-    'polla.middleware.ThreadLocalMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -126,3 +127,5 @@ STATICFILES_FINDERS = (
 #   "django.contrib.staticfiles.finders.FileSystemFinder",
    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
+
+POLLA_REPLACE_DOTS_IN_DOMAINS = True

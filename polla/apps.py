@@ -14,7 +14,7 @@ class PollaAppConfig(AppConfig):
         load_settings(polla_settings)
 
         from django.conf import settings
-        if 'threadlocals.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+        if 'polla.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
             from .utils import get_current_site
             from django.contrib.sites import shortcuts
             shortcuts.get_current_site = get_current_site

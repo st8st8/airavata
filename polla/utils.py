@@ -6,8 +6,9 @@ from django.db.models import Q
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.http.request import split_domain_port
 from django.conf import settings
-from .exceptions import NoRequestFound
+from django.utils import lru_cache
 
+from .exceptions import NoRequestFound
 
 
 def load_settings(app_settings):
@@ -250,3 +251,29 @@ def register_signals(model):
     post_save.connect(CachedAllowedSites.update_cache, sender=model, dispatch_uid='update_allowedsites')
     post_delete.connect(CachedAllowedSites.update_cache, sender=model, dispatch_uid='update_allowedsites')
 
+
+## Resolver
+
+@lru_cache.lru_cache(maxsize=None)
+def get_resolver_for_site(urlconf, site):
+    from django.core.urlresolvers import RegexURLResolver
+    if urlconf is None:
+        urlconf = settings.ROOT_URLCONF
+    return RegexURLResolver(r'^/', urlconf)
+
+
+def get_resolver(urlconf):
+    current_site = get_current_path()
+    return get_resolver_for_site(urlconf, current_site)
+
+
+@lru_cache.lru_cache(maxsize=None)
+def get_ns_resolver_for_site(ns_pattern, resolver, site):
+    from django.core.urlresolvers import RegexURLResolver
+    ns_resolver = RegexURLResolver(ns_pattern, resolver.url_patterns)
+    return RegexURLResolver(r'^/', [ns_resolver])
+
+
+def get_ns_resolver(ns_pattern, resolver):
+    current_site = get_current_path()
+    return get_ns_resolver_for_site(ns_pattern, resolver, current_site)

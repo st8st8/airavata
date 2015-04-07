@@ -123,7 +123,7 @@ class PageSiteTest(WebTest):
         self.assertEqual(response.status_code, 404)
 
 
-class TemplateLoaderTest(WebTest):
+class TestWithExampleComAndAlias(object):
 
     @classmethod
     def setUpTestData(cls):
@@ -139,6 +139,9 @@ class TemplateLoaderTest(WebTest):
         cls.edc_alias = SiteAliasFactory.create(site=cls.edc)
         cls.other = SiteFactory.create()
         cls.other_alias = SiteAliasFactory.create(site=cls.other)
+
+
+class TemplateLoaderTest(TestWithExampleComAndAlias, WebTest):
 
     def test_specific_site_finds_custom_template(self):
         for site in (self.edc, self.edc_alias):
@@ -159,3 +162,19 @@ class TemplateLoaderTest(WebTest):
 
             response = self.app.get(reverse('homepage'), extra_environ={'HTTP_HOST': domain})
             self.assertNotContains(response, 'CustomTemplate')
+
+
+class UrlsTest(TestWithExampleComAndAlias, WebTest):
+
+    def test_default_url(self):
+        response = self.app.get('/', extra_environ={'HTTP_HOST': self.other.domain})
+        self.assertEqual(response.status_code, 200)
+        response = self.app.get('/', extra_environ={'HTTP_HOST': self.edc.domain})
+        self.assertEqual(response.status_code, 200)
+
+    def test_specific_url(self):
+        response = self.app.get('/test/a.html', extra_environ={'HTTP_HOST': self.edc.domain})
+        self.assertEqual(response.status_code, 200)
+        response = self.app.get('/test/a.html',
+            extra_environ={'HTTP_HOST': self.other.domain}, status=404)
+        self.assertEqual(response.status_code, 404)
