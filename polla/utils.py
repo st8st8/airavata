@@ -6,7 +6,13 @@ from django.db.models import Q
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.http.request import split_domain_port
 from django.conf import settings
-from django.utils import lru_cache
+try:
+    from functools import lru_cache
+except ImportError:
+    try:
+        from cache import LruCache as lru_cache
+    except ImportError:
+        from django.utils import lru_cache
 
 from .exceptions import NoRequestFound
 
