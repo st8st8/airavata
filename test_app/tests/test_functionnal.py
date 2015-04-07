@@ -166,15 +166,30 @@ class TemplateLoaderTest(TestWithExampleComAndAlias, WebTest):
 
 class UrlsTest(TestWithExampleComAndAlias, WebTest):
 
+    def get_domains(self):
+        if six.PY2:
+            rv = {
+                'edc': str(self.edc.domain),
+                'other': str(self.other.domain),
+            }
+        else:
+            rv = {
+                'edc': self.edc.domain,
+                'other': self.other.domain,
+            }
+        return rv
+
     def test_default_url(self):
-        response = self.app.get('/', extra_environ={'HTTP_HOST': self.other.domain})
+        domains = self.get_domains()
+        response = self.app.get('/', extra_environ={'HTTP_HOST': domains['other']})
         self.assertEqual(response.status_code, 200)
-        response = self.app.get('/', extra_environ={'HTTP_HOST': self.edc.domain})
+        response = self.app.get('/', extra_environ={'HTTP_HOST': domains['edc']})
         self.assertEqual(response.status_code, 200)
 
     def test_specific_url(self):
-        response = self.app.get('/test/a.html', extra_environ={'HTTP_HOST': self.edc.domain})
+        domains = self.get_domains()
+        response = self.app.get('/test/a.html', extra_environ={'HTTP_HOST': domains['edc']})
         self.assertEqual(response.status_code, 200)
         response = self.app.get('/test/a.html',
-            extra_environ={'HTTP_HOST': self.other.domain}, status=404)
+            extra_environ={'HTTP_HOST': domains['other']}, status=404)
         self.assertEqual(response.status_code, 404)
