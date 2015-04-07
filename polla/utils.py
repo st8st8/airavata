@@ -6,13 +6,7 @@ from django.db.models import Q
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.http.request import split_domain_port
 from django.conf import settings
-try:
-    from functools import lru_cache
-except ImportError:
-    try:
-        from cache import LruCache as lru_cache
-    except ImportError:
-        from django.utils.lru_cache import lru_cache
+from django.utils.lru_cache import lru_cache
 
 from .exceptions import NoRequestFound
 
@@ -92,8 +86,12 @@ def get_domain_path(domain):
 
 
 def get_current_path(request=None):
-    site = get_current_site(request)
-    return get_domain_path(site.domain)
+    try:
+        site = get_current_site(request)
+        return get_domain_path(site.domain)
+    except NoRequestFound:
+        ## Request hasn't been loaded, rather than crashing we will return a blank value
+        return ''
 
 
 ## Allowed hosts - adapted from https://github.com/kezabelle/django-allowedsites

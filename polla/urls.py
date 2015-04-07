@@ -29,6 +29,8 @@ class UrlPatterns(object):
             return patterns
         except ImportError:
             pass
+        except ValueError:
+            pass
         return None
 
     def get_non_extra_urls(self):
