@@ -1,9 +1,6 @@
 Advanced usage
 ==============
 
-.. warning::
-    Those advanced usages are only available on the dev version (eg: not on the PyPi version) of Polla.
-
 .. danger::
     These advanced usages all require to resort to *local threads* to be able to access the current request. Some people have `strong feeelings against local threads use in Django <https://groups.google.com/forum/?fromgroups=#!topic/django-users/5681nX0YPgQ>`_. Local threads in themselves (in our humble opinion) are not a security risk but may amplify some other security risks. So before you use them, make sure you know what you are getting into.
 

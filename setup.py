@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='polla',
-    version='0.9',
+    version='0.9.1',
     packages=['polla', 'polla.management.commands', 'polla.templatetags'],
     include_package_data=True,
     license='BSD License',
