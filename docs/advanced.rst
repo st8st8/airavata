@@ -118,3 +118,29 @@ The ``static`` templatetag from ``sitestatic`` will first try to find site-speci
       ...
 
 
+UrlPatterns
+-----------
+
+.. note::
+    To use this feature, make sure you set ``POLLA_REPLACE_DOTS_IN_DOMAINS`` to ``True`` in your ``settings.py``
+    On Python 2 also make sure to include ``__init__.py`` in both ``sites`` and it's sub_directory
+
+Polla allows you to define different urlpatterns for specific domains. To use this feature, update your main ``urls.py`` to look like this
+::
+    ...
+    from polla import urls
+
+
+    urlpatterns = urls.UrlPatterns([
+        # Place your patterns here
+        ...
+        url(...),
+    ])
+
+Wrapping the ``urlpatterns`` list with ``UrlPattern`` will allow Polla to check for a urls.py files in ``sites/<your underscored domain name>/``. If it finds one, it will load it instead of the default provided ``urlpatterns``.
+
+If you need common urls feel free to extend the ``UrlPattern`` wrapper with a list of common urls like this
+::
+    urlpatterns += [
+        url(r'^' + settings.STATIC_URL[1:] + r'(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    ]
