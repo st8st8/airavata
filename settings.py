@@ -51,8 +51,6 @@ PROJECT_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    ## FIXME: https://github.com/nebstrebor/django-threadlocals/pull/2
-    # 'threadlocals.middleware.ThreadLocalMiddleware',
     'polla.middleware.ThreadLocalMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',

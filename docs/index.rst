@@ -37,4 +37,5 @@ Content:
    advanced
    models
    views
+   FAQ
    contributing

@@ -43,15 +43,14 @@ def domain_available(obj, site_klass):
 
 def _get_host(request=None):
     if request is None:
-        ## FIXME: https://github.com/nebstrebor/django-threadlocals/pull/2
-        # if 'threadlocals.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
         if 'polla.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
-            from threadlocals.threadlocals import get_current_request
-            request = get_current_request()
+            from threadlocals.threadlocals import get_thread_variable
+            host = get_thread_variable('requested_host')
+            if host is None:
+                raise NoRequestFound("HostName could not be retrieved")
+            return host
         else:
             raise ImproperlyConfigured("You should either provide a request or install threadlocals")
-    if request is None:
-        raise NoRequestFound("No request was provided nor could it be retrieved")
     domain_host, domain_port = split_domain_port(request.get_host())
     return domain_host
 
