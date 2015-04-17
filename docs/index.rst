@@ -21,7 +21,7 @@ Welcome to Django Polla's documentation!
 
 Polla (πολλά - in Greek "lots of / multi") is a Django 1.8+ library that allows you to hosts multiple dynamic sites running on a single Django instance/db.
 
-I have been using a customized version of `dynamicsites <https://bitbucket.org/uysrc/django-dynamicsites/overview>`_ for a while now. But with the new features from Django 1.7 and 1.8, there exists another simpler, and more pythonesque IMHO, way to achieve the same results. Polla is an attempt at that *other* way.
+I have been using a customized version of `dynamicsites <https://bitbucket.org/uysrc/django-dynamicsites/overview>`_ for a while now. But with the new features from Django 1.7 and 1.8, there exists another simpler way to achieve the same results. Polla is an attempt at that *other* way.
 
 
 This project is licensed under the `BSD 2-Clause License <http://bb.levit.be/django-polla/src/default/LICENSE.txt>`_

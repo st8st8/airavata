@@ -2,21 +2,21 @@ Advanced usage
 ==============
 
 .. danger::
-    These advanced usages all require to resort to *local threads* to be able to access the current request. Some people have `strong feeelings against local threads variables use in Django <https://groups.google.com/forum/?fromgroups=#!topic/django-users/5681nX0YPgQ>`_. Local threads in themselves (in our humble opinion) are not a security risk but may amplify some other security risks if you use them to store sensitive information.
+    These advanced usages all require to resort to *local threads* to be able to access the current *requested domain name*. Some people have `strong feeelings against local threads variables use in Django <https://groups.google.com/forum/?fromgroups=#!topic/django-users/5681nX0YPgQ>`_. Local threads in themselves (in our humble opinion) are not a security risk but may amplify some other security risks if you use them to store sensitive information.
     
     Polla uses local threads to store the *requested host name*. If you feel this is sensitive information, make sure you know what you are getting into.
 
 Extra requirement
 -----------------
 
-As said above ``threadlocals`` is an extra requirement for the advanced features, so go ahead and pip install it
+As said above ``threadlocals`` is an extra requirement for the advanced features to work, so go ahead and pip install it
 ::
     pip install django-threadlocals
 
 Common Settings
 ---------------
 
-To use any of the following features, make sure you enable the `LocalThreadMiddleware` (put it before ``django.middleware.common.CommonMiddleware``.
+To use any of the following features, make sure you enable `LocalThreadMiddleware` (put it before ``django.middleware.common.CommonMiddleware``.
 ::
     ##settings.py
     MIDDLEWARE_CLASSES = (
@@ -35,7 +35,7 @@ Every site-specific feature (template, urls, static file) is hosted under a main
 POLLA_REPLACE_DOTS_IN_DOMAINS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This setting is set to ``False`` by default. For people wanting to use Polla as or drop-in replacement for ``dynamicsites`` or would like to use the Urls feature, you shoud set it tu ``True``.
+This setting is set to ``False`` by default. For people wanting to use Polla as a drop-in replacement for ``dynamicsites`` or who would like to use the **Urls** feature, you shoud set it to ``True``.
 
 Setting ``POLLA_REPLACE_DOTS_IN_DOMAINS`` will change the default behaviour when it comes to looking for site specific features.
 
@@ -48,7 +48,7 @@ e.g: you are trying to load a template named ``base.html`` for the site ``exampl
 TemplateLoader
 --------------
 
-Polla provides a TemplateLoader allowing you to load different templates according to the requested host. Specific templates should be hosted in the special under the directory configured in ``POLLA_SITES_DIR`` under a sub-directory corresponding to the main domain name (the domain name in ``Site``).
+Polla provides a TemplateLoader allowing you to load different templates according to the requested host. Specific templates should be placed under the directory configured in ``POLLA_SITES_DIR`` under a sub-directory corresponding to the main domain name (the domain name in ``Site``).
 
 To enable Polla's template loader, you have to make the following changes to your settings.py:
 ::
@@ -71,10 +71,10 @@ To enable Polla's template loader, you have to make the following changes to you
         },
     ]
 
-Now you can write ``example.com`` specific templates in ``sites/example.com/templates/``
+Now you can write ``example.com`` specific templates in ``sites/example.com/templates/`` (or ``sites/example_com/templates/`` depending on your settings)
 
 .. note::
-    As with the other loaders, you will have to restart runserver in order for Django to find newly added templates.
+    As with the other loaders, you will have to restart the web server in order for Django to find newly added templates.
 
 
 StaticFile Finder
@@ -136,7 +136,7 @@ Polla allows you to define different urlpatterns for specific domains. To use th
         url(...),
     ])
 
-Wrapping the ``urlpatterns`` list with ``UrlPattern`` will allow Polla to check for a urls.py files in ``sites/<your underscored domain name>/``. If it finds one, it will load it instead of the default provided ``urlpatterns``.
+Wrapping the ``urlpatterns`` list within ``UrlPattern`` will allow Polla to check for a ``urls.py`` file in ``sites/<your underscored domain name>/``. If it finds one, it will load it instead of the default provided ``urlpatterns``.
 
 If you need common urls feel free to extend the ``UrlPattern`` wrapper with a list of common urls like this
 ::

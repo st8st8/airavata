@@ -1,8 +1,8 @@
 # Django Polla
 
-Python 2.7 [![Build Status](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-2.7)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=System-CPython-2.7)
-Python 3.2 [![Build Status](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-3.2)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=System-CPython-3.2/)
-Python 3.4 [![Build Status](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=CPython-3.4)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=CPython-3.4/)
+Python 2.7 [![Build Status 2.7](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-2.7)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=System-CPython-2.7)
+Python 3.2 [![Build Status 3.2](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-3.2)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=System-CPython-3.2/)
+Python 3.4 [![Build Status 3.4](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=CPython-3.4)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=CPython-3.4/)
 
 
 Docs [![Docs status](https://readthedocs.org/projects/django-polla/badge/?version=latest)](https://readthedocs.org/projects/django-polla/badge/?version=latest)

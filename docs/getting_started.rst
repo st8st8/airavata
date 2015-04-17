@@ -25,7 +25,7 @@ ALLOWED_HOSTS
 -------------
 
 Polla provides two wrapper classes to fetch ``ALLOWED_HOSTS`` from the database instead of hard-coding them.
-These two classes were largely inspired by (read mostly copied from) `kezabelle's django-allowedsites <https://github.com/kezabelle/django-allowedsites>`_.
+These two classes are extended from `kezabelle's django-allowedsites <https://github.com/kezabelle/django-allowedsites>`_.
 Namely they are ``polla.utils.AllowedSites`` and ``polla.utils.CachedAllowedSites``. Use either of those in your settings.py
 ::
     ## settings.py
@@ -60,7 +60,7 @@ If you are planning on using CachedAllowedSites, don't forget to register cache 
 Set the domain for your primary site
 ------------------------------------
 
-Once ``django.contrib.sites`` is added to your ``settings.py`` Django won't let you access your website unless one of teh following is true:
+Once ``django.contrib.sites`` is added to your ``settings.py`` Django won't let you access your website unless one of the following is true:
 
 * ``SITE_ID`` is also set in your ``settings.py`` (which we don't want to do since this library is for hosting *multiple dynamic* sites)
 * ``DEBUG`` is set to ``True`` which is ok for dev but not for live servers
