@@ -1,4 +1,4 @@
 include README.md
 include LICENCE.txt
-recursive-include polla/static *
-recursive-include polla/templates *
+recursive-include airavata/static *
+recursive-include airavata/templates *
