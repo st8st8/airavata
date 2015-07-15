@@ -22,4 +22,5 @@ syntax: regexp
 ^static/
 ^docs/_build
 ^dist/
-^polla.egg-info/
+^build/
+^airavata.egg-info/
