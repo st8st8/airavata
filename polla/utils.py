@@ -164,3 +164,16 @@ def get_ns_resolver_for_site(ns_pattern, resolver, site):
 def get_ns_resolver(ns_pattern, resolver):
     current_site = get_current_path()
     return get_ns_resolver_for_site(ns_pattern, resolver, current_site)
+
+
+## Upload path builder
+
+def upload_path(path_or_callable=''):
+    if callable(path_or_callable):
+        return lambda instance, filename: '{}/{}'.format(get_current_path(), path_or_callable(instance, filename))
+    else:
+        return lambda instance, filename: '{}/{}{}'.format(
+            get_current_path(),
+            '{}/'.format(path_or_callable) if path_or_callable != '' else '',
+            filename
+        )
