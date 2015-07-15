@@ -45,7 +45,7 @@ def domain_available(obj, site_klass):
 
 def _get_host(request=None):
     if request is None:
-        if 'polla.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+        if 'airavata.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
             from threadlocals.threadlocals import get_thread_variable
             host = get_thread_variable('requested_host')
             if host is None:
@@ -59,7 +59,7 @@ def _get_host(request=None):
 
 def _get_site_by_request(self, request=None):
     host = _get_host(request)
-    # Looking for domain in django.contib.site.Site and polla.SiteAlias
+    # Looking for domain in django.contib.site.Site and airavata.SiteAlias
     if host not in SITE_CACHE:
       site = self.get(Q(domain__iexact=host) | Q(aliases__domain__iexact=host))
       SITE_CACHE[host] = site

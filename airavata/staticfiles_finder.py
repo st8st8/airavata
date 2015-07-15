@@ -6,7 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib.sites.models import Site
 from django.conf import settings
 
-from polla.utils import get_domain_path
+from airavata.utils import get_domain_path
 
 
 class SiteFinder(FileSystemFinder):

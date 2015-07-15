@@ -7,7 +7,7 @@ from django.http.request import validate_host
 from django.contrib.sites.models import Site
 from unittest import skipIf
 
-from polla.utils import AllowedSites
+from airavata.utils import AllowedSites
 
 from django_webtest import WebTest
 

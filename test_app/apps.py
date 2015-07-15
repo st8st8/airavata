@@ -1,5 +1,6 @@
 from django.apps import AppConfig
-from polla.utils import register_signals
+from airavata.utils import register_signals
+
 
 class TestAppConfig(AppConfig):
     name = 'test_app'
@@ -7,7 +8,6 @@ class TestAppConfig(AppConfig):
 
     def ready(self):
         from django.contrib.sites.models import Site
-        from polla.models import SiteAlias
+        from airavata.models import SiteAlias
         for model in [Site, SiteAlias]:
             register_signals(model)
-

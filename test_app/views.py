@@ -2,7 +2,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.base import ContextMixin
 from django.contrib.sites.shortcuts import get_current_site
 
-from polla.views import SiteFilteredViewMixin
+from airavata.views import SiteFilteredViewMixin
 
 from .models import Page
 

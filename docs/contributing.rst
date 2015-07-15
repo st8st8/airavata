@@ -1,7 +1,7 @@
 Contributing
 ============
 
-Contributions, feature requests and bug reports are welcome on `BitBucket <https://bitbucket.org/levit_scs/django-polla/>`_
+Contributions, feature requests and bug reports are welcome on `BitBucket <https://bitbucket.org/levit_scs/django-airavata/>`_
 
 Guidelines
 ----------

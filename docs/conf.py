@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Django Polla documentation build configuration file, created by
+# Django Airavata documentation build configuration file, created by
 # sphinx-quickstart on Sun Apr  5 14:11:15 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Django Polla'
+project = u'Django Airavata'
 copyright = u'2015, Levit SCS'
 author = u'Levit SCS'
 
@@ -202,7 +202,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'DjangoPolladoc'
+htmlhelp_basename = 'DjangoAiravatadoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -224,7 +224,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'DjangoPolla.tex', u'Django Polla Documentation',
+  (master_doc, 'DjangoAiravata.tex', u'Django Airavata Documentation',
    u'Levit SCS', 'manual'),
 ]
 
@@ -254,7 +254,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'djangopolla', u'Django Polla Documentation',
+    (master_doc, 'djangoairavata', u'Django Airavata Documentation',
      [author], 1)
 ]
 
@@ -268,8 +268,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'DjangoPolla', u'Django Polla Documentation',
-   author, 'DjangoPolla', 'One line description of project.',
+  (master_doc, 'DjangoAiravata', u'Django Airavata Documentation',
+   author, 'DjangoAiravata', 'One line description of project.',
    'Miscellaneous'),
 ]
 

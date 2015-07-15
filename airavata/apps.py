@@ -3,18 +3,18 @@ from django.apps import AppConfig
 
 class PollaAppConfig(AppConfig):
 
-    name = 'polla'
+    name = 'airavata'
     verbose_name = 'Polla'
 
     def ready(self):
         from .utils import _get_site_by_request, domain_available, load_settings
-        from . import settings as polla_settings
+        from . import settings as airavata_settings
         from django.contrib.sites.models import SiteManager, Site
 
-        load_settings(polla_settings)
+        load_settings(airavata_settings)
 
         from django.conf import settings
-        if 'polla.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+        if 'airavata.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
             from .utils import get_current_site
             from django.contrib.sites import shortcuts
             shortcuts.get_current_site = get_current_site

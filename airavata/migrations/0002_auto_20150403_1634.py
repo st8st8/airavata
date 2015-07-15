@@ -8,7 +8,7 @@ import django.contrib.sites.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polla', '0001_initial'),
+        ('airavata', '0001_initial'),
     ]
 
     operations = [

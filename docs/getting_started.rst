@@ -4,18 +4,18 @@ Getting started
 Install
 -------
 
-``pip install polla``
+``pip install airavata``
 
 Configure
 ---------
 
-Add ``polla`` and ``django.contrib.sites`` to your installed apps
+Add ``airavata`` and ``django.contrib.sites`` to your installed apps
 ::
     ## settings.py
     INSTALLED_APPS = [
         ...
         'django.contrib.sites',
-        'polla',
+        'airavata',
     ]
 
 .. danger::
@@ -24,12 +24,12 @@ Add ``polla`` and ``django.contrib.sites`` to your installed apps
 ALLOWED_HOSTS
 -------------
 
-Polla provides two wrapper classes to fetch ``ALLOWED_HOSTS`` from the database instead of hard-coding them.
+Airavata provides two wrapper classes to fetch ``ALLOWED_HOSTS`` from the database instead of hard-coding them.
 These two classes are extended from `kezabelle's django-allowedsites <https://github.com/kezabelle/django-allowedsites>`_.
-Namely they are ``polla.utils.AllowedSites`` and ``polla.utils.CachedAllowedSites``. Use either of those in your settings.py
+Namely they are ``airavata.utils.AllowedSites`` and ``airavata.utils.CachedAllowedSites``. Use either of those in your settings.py
 ::
     ## settings.py
-    from polla.utils import AllowedSites
+    from airavata.utils import AllowedSites
     ALLOWED_HOSTS = AllowedSites()
 
 Cache invalidation
@@ -39,7 +39,7 @@ If you are planning on using CachedAllowedSites, don't forget to register cache 
 ::
     ## apps.py
     from django.apps import AppConfig
-    from polla.utils import register_signals
+    from airavata.utils import register_signals
     
     class MyAppConfig(AppConfig):
       name = 'my_app'
@@ -47,7 +47,7 @@ If you are planning on using CachedAllowedSites, don't forget to register cache 
     
       def ready(self):
             from django.contrib.sites.models import Site
-            from polla.models import SiteAlias
+            from airavata.models import SiteAlias
             for model in [Site, SiteAlias]:
                 register_signals(model)
     
@@ -64,9 +64,9 @@ Once ``django.contrib.sites`` is added to your ``settings.py`` Django won't let 
 
 * ``SITE_ID`` is also set in your ``settings.py`` (which we don't want to do since this library is for hosting *multiple dynamic* sites)
 * ``DEBUG`` is set to ``True`` which is ok for dev but not for live servers
-* **Django finds a** ``Site`` **(or a** ``SiteAlias`` **with Polla) corresponding to the** ``host`` **you are requesting**
+* **Django finds a** ``Site`` **(or a** ``SiteAlias`` **with Airavata) corresponding to the** ``host`` **you are requesting**
 
-In order to set the correct domain on the first site in your database, Polla provides a management command. Simply run
+In order to set the correct domain on the first site in your database, Airavata provides a management command. Simply run
 
 ``python manage.py setprimarydomain``
 

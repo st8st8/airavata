@@ -3,7 +3,7 @@ from factory.django import DjangoModelFactory
 from django.contrib.sites.models import Site
 from django.utils.text import slugify
 
-from polla.models import SiteAlias
+from airavata.models import SiteAlias
 from ..models import Page
 
 

@@ -7,9 +7,9 @@ from django.core.urlresolvers import reverse
 from unittest import skipIf
 
 
-from polla.utils import get_domain_path
-from polla.templatetags.sitestatic import static
-from polla.staticfiles_finder import SiteFinder
+from airavata.utils import get_domain_path
+from airavata.templatetags.sitestatic import static
+from airavata.staticfiles_finder import SiteFinder
 
 from mock import patch, MagicMock as Mock
 
@@ -28,7 +28,7 @@ class SiteAliasTest(TestCase):
         cls.second_alias = SiteAliasFactory.create(site=cls.first_alias.site)
 
     def _assert_site_is(self, site_id, domain):
-        with patch('polla.utils._get_host', Mock(return_value=domain)):
+        with patch('airavata.utils._get_host', Mock(return_value=domain)):
             self.assertEqual(site_id, Site.objects._get_site_by_request(None).pk)
 
     def testFindMainHost(self):
@@ -79,12 +79,12 @@ class UtilsTest(TestCase):
 class TemplateTagsTest(TestCase):
 
     def test_specific_path_exists(self):
-        with patch('polla.utils.get_domain_path', Mock(return_value='example_com')), patch('polla.utils.get_current_site', Mock(return_value=SiteFactory.build())):
+        with patch('airavata.utils.get_domain_path', Mock(return_value='example_com')), patch('airavata.utils.get_current_site', Mock(return_value=SiteFactory.build())):
             self.assertEqual('/static/example_com/css/site.css', static('css/site.css'))
             self.assertEqual('/static/dummy.txt', static('dummy.txt'))
 
     def test_specific_path_doesnt_exist(self):
-        with patch('polla.utils.get_domain_path', Mock(return_value='brol_net')), patch('polla.utils.get_current_site', Mock(return_value=SiteFactory.build())):
+        with patch('airavata.utils.get_domain_path', Mock(return_value='brol_net')), patch('airavata.utils.get_current_site', Mock(return_value=SiteFactory.build())):
             self.assertEqual('/static/dummy.txt', static('dummy.txt'))
             self.assertEqual('/static/css/site.css', static('css/site.css'))
 
@@ -104,13 +104,13 @@ class StaticFileFinderTest(TestCase):
 class UrlsTest(TestCase):
 
     def test_defaults(self):
-        with patch('polla.utils.get_current_path', Mock(return_value='brol_net')):
+        with patch('airavata.utils.get_current_path', Mock(return_value='brol_net')):
             home_url = reverse('homepage')
             self.assertEqual(home_url, '/')
 
     @skipIf(sys.version_info < MIN_VERSION, "FIXME: find out why test fails in older pythons")
     def test_specific(self):
-        with patch('polla.utils.get_current_path', Mock(return_value='example_com')):
+        with patch('airavata.utils.get_current_path', Mock(return_value='example_com')):
             from urls import urlpatterns
             home_url = reverse('homepage')
             self.assertEqual(home_url, '/')

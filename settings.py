@@ -1,5 +1,5 @@
 """
-Django settings for polla project.
+Django settings for airavata project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.8/topics/settings/
@@ -23,7 +23,7 @@ SECRET_KEY = 'dbrb&bcl4ns(11y9y@0i%d(%ay=eq)+px#n^@_e8isq%e#)&qz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-from polla.utils import AllowedSites
+from airavata.utils import AllowedSites
 ALLOWED_HOSTS = AllowedSites()
 
 
@@ -40,18 +40,18 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'polla',
+    'airavata',
 
     'factory',
     'django_jenkins',
 )
 
 PROJECT_APPS = (
-    'polla',
+    'airavata',
 )
 
 MIDDLEWARE_CLASSES = (
-    'polla.middleware.ThreadLocalMiddleware',
+    'airavata.middleware.ThreadLocalMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -78,7 +78,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'loaders': (
-                'polla.template_loader.Loader',
+                'airavata.template_loader.Loader',
 #                'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader'
             ),
@@ -121,7 +121,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_FINDERS = (
-   "polla.staticfiles_finder.SiteFinder",
+   "airavata.staticfiles_finder.SiteFinder",
 #   "django.contrib.staticfiles.finders.FileSystemFinder",
    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )

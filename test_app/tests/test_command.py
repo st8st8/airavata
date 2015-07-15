@@ -5,7 +5,7 @@ from django.utils.six import StringIO
 
 from django.contrib.sites.models import Site
 
-from polla.models import SiteAlias
+from airavata.models import SiteAlias
 
 
 class CommandTest(TestCase):

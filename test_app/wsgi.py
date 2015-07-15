@@ -1,5 +1,5 @@
 """
-WSGI config for polla project.
+WSGI config for airavata project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

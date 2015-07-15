@@ -87,9 +87,9 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/DjangoPolla.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/DjangoAiravata.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/DjangoPolla.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/DjangoAiravata.qhc"
 
 applehelp:
 	$(SPHINXBUILD) -b applehelp $(ALLSPHINXOPTS) $(BUILDDIR)/applehelp
@@ -104,8 +104,8 @@ devhelp:
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/DjangoPolla"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/DjangoPolla"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/DjangoAiravata"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/DjangoAiravata"
 	@echo "# devhelp"
 
 epub:

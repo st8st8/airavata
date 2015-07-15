@@ -13,14 +13,14 @@ except ImportError:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='polla',
-    version='0.9.2',
-    packages=['polla', 'polla.management.commands', 'polla.templatetags'],
+    name='airavata',
+    version='0.9.3',
+    packages=['airavata', 'airavata.management.commands', 'airavata.templatetags'],
     include_package_data=True,
     license='BSD License',
     description='Multiple dynamic sistes with Django',
     long_description=README,
-    url='http://bb.levit.be/djang-polla',
+    url='http://bb.levit.be/djang-airavata',
     author='Levit SCS',
     author_email='emma@levit.be',
     classifiers=[

@@ -1,4 +1,4 @@
-# Django Polla
+# Django Airavata
 
 Python 2.7 [![Build Status 2.7](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-2.7)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=System-CPython-2.7)
 Python 3.2 [![Build Status 3.2](http://jenkins.lasolution.be/buildStatus/icon?job=Polla/PYTHON=System-CPython-3.2)](http://jenkins.lasolution.be/view/Levit/job/Polla/PYTHON=System-CPython-3.2/)
@@ -10,9 +10,15 @@ PyPi [![PyPi version](https://pypip.in/v/polla/badge.png)](https://crate.io/pack
 [![PyPi downloads](https://pypip.in/d/polla/badge.png)](https://crate.io/packages/polla/)
 
 
-Polla (πολλά - in Greek "lots of / multi") is a Django 1.8+ library that allows you to hosts multiple dynamic sites running on a single Django instance/db.
+Airavata is a mythological white elephant who carries the Hindu god Indra. Airavata has four tusks and seven trunks and is spotless white. [source on Wikipedia](https://en.wikipedia.org/wiki/Airavata).
+
+Airavata is also a Django 1.8+ library that allows you to hosts multiple dynamic sites running on a single Django instance/db.
 
 I have been using a customized version of [dynamicsites](https://bitbucket.org/uysrc/django-dynamicsites/overview) for a while now. But with the new features from Django 1.7 and 1.8, there exists another simpler, and more pythonesque IMHO, way to achieve the same results. Polla is an attempt at that *other* way.
 
 
 See documentation on [ReadTheDocs](http://django-polla.readthedocs.org/en/latest/)
+
+Thanks to:
+
+- @ashwoods for the new name :-)
