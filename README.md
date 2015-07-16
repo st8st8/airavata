@@ -19,6 +19,10 @@ I have been using a customized version of [dynamicsites](https://bitbucket.org/u
 
 See documentation on [ReadTheDocs](http://django-polla.readthedocs.org/en/latest/)
 
+If you are planning on contributing (or are just curious about our values), please take the time to read the [project's Code of Conduct](COC.md)
+
+
 Thanks to:
 
 - @ashwoods for the new name :-)
+- [Coraline Ada Ehmke](http://where.coraline.codes/) for creating [the contributor covenant](http://contributor-covenant.org/)
