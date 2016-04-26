@@ -2,9 +2,15 @@ import io
 
 from django.conf import settings
 from django.core.exceptions import SuspiciousFileOperation
-from django.template.base import TemplateDoesNotExist
 from django.template.loaders.base import Loader as BaseLoader
 from django.utils._os import safe_join
+from django import get_version
+
+if get_version() > '1.9':
+    from django.template.exceptions import TemplateDoesNotExist
+else:
+    from django.template.base import TemplateDoesNotExist
+
 from .utils import get_current_path
 from .exceptions import NoRequestFound
 
