@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 from django.apps import apps
-from django.contrib.sites.models import SITE_CACHE
 from django.db.models import Q
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.http.request import split_domain_port
@@ -58,6 +57,7 @@ def _get_host(request=None):
 
 
 def _get_site_by_request(self, request=None):
+    from django.contrib.sites.models import SITE_CACHE
     host = _get_host(request)
     # Looking for domain in django.contib.site.Site and airavata.SiteAlias
     if host not in SITE_CACHE:
