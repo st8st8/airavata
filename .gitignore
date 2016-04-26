@@ -1,0 +1,15 @@
+## we use vim so we don't want to version swap files nor tags
+*.swp
+*.swo
+*.swn
+## when pulling conflicting revisions, mercurial creates a .orig file; We don't want those either
+*.orig
+## compiled python source has a .pyc extension; We don't want those either
+*.pyc
+## we don't want to version the database
+db.sqlite3
+static/
+docs/_build
+dist/
+build/
+airavata.egg-info/
