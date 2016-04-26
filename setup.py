@@ -14,13 +14,13 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='airavata',
-    version='0.9.3',
-    packages=['airavata', 'airavata.management.commands', 'airavata.templatetags'],
+    version='0.9.5',
+    packages=['airavata', 'airavata.management.commands', 'airavata.management', 'airavata.templatetags', 'airavata.templatetags', 'airavata.migrations'],
     include_package_data=True,
     license='BSD License',
     description='Multiple dynamic sistes with Django',
     long_description=README,
-    url='http://bb.levit.be/djang-airavata',
+    url='https://bitbucket.org/levit_scs/django-airavata',
     author='Levit SCS',
     author_email='emma@levit.be',
     classifiers=[
@@ -33,9 +33,8 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
