@@ -13,3 +13,5 @@ docs/_build
 dist/
 build/
 airavata.egg-info/
+## IDE related
+.idea/
