@@ -19,7 +19,7 @@ setup(
               'airavata.templatetags', 'airavata.migrations'],
     include_package_data=True,
     license='BSD License',
-    description='Multiple dynamic sistes with Django',
+    description='Multiple dynamic sites with Django',
     long_description=README,
     url='https://bitbucket.org/levit_scs/django-airavata',
     author='Levit SCS',
