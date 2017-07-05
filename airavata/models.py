@@ -16,8 +16,8 @@ class SiteAlias(models.Model):
                               validators=[ _simple_domain_name_validator])
 
     class Meta:
-        verbose_name = "SiteAlias"
-        verbose_name_plural = "SiteAliases"
+        verbose_name = _("Site Alias")
+        verbose_name_plural = _("SiteAliases")
 
     def __str__(self):
         return '{} ({})'.format(self.domain, self.site.domain)

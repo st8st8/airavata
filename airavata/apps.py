@@ -1,10 +1,11 @@
 from django.apps import AppConfig
+from django.utils.translation import ugettext_lazy as _
 
 
 class AiravataAppConfig(AppConfig):
 
     name = 'airavata'
-    verbose_name = 'Polla'
+    verbose_name = _('Airavata')
 
     def ready(self):
         from .utils import _get_site_by_request, domain_available, load_settings
