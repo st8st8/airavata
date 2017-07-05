@@ -19,7 +19,7 @@ Add ``airavata`` and ``django.contrib.sites`` to your installed apps
     ]
 
 .. danger::
-   Make sure SITE_ID in not set in ``settings.py``
+   Make sure SITE_ID is *not* set in ``settings.py``
 
 ALLOWED_HOSTS
 -------------
