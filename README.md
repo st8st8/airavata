@@ -1,7 +1,5 @@
 # Django Airavata
 
-Build status [![Build status](https://jenkins.levitnet.be/buildStatus/icon?job=Polla)](https://jenkins.levitnet.be/buildStatus/icon?job=Polla)
-
 Docs [![Docs status](https://readthedocs.org/projects/django-polla/badge/?version=latest)](https://readthedocs.org/projects/django-polla/badge/?version=latest)
 PyPi [![PyPI version](https://badge.fury.io/py/airavata.svg)](https://badge.fury.io/py/airavata)
 
