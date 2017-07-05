@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class PollaAppConfig(AppConfig):
+class AiravataAppConfig(AppConfig):
 
     name = 'airavata'
     verbose_name = 'Polla'
