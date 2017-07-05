@@ -19,7 +19,9 @@ Welcome to Django Airavata's documentation!
 | Docs |docs|           | Version |pypiv|       | |pypid|               |
 +-----------------------+-----------------------+-----------------------+
 
-Airavata (πολλά - in Greek "lots of / multi") is a Django 1.8+ library that allows you to hosts multiple dynamic sites running on a single Django instance/db.
+Airavata is a mythological white elephant who carries the Hindu god Indra. Airavata has four tusks and seven trunks and is spotless white. [source on Wikipedia](https://en.wikipedia.org/wiki/Airavata).
+
+Airavata is also a Django 1.8+ library that allows you to hosts multiple dynamic sites running on a single Django instance/db.
 
 I have been using a customized version of `dynamicsites <https://bitbucket.org/uysrc/django-dynamicsites/overview>`_ for a while now. But with the new features from Django 1.7 and 1.8, there exists another simpler way to achieve the same results. Airavata is an attempt at that *other* way.
 
