@@ -126,4 +126,4 @@ STATICFILES_FINDERS = (
    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
-POLLA_REPLACE_DOTS_IN_DOMAINS = True
+AIRAVATA_REPLACE_DOTS_IN_DOMAINS = True

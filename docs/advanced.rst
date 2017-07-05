@@ -27,19 +27,19 @@ To use any of the following features, make sure you enable `LocalThreadMiddlewar
     )
 
 
-POLLA_SITES_DIR
+AIRAVATA_SITES_DIR
 ~~~~~~~~~~~~~~~
 
-Every site-specific feature (template, urls, static file) is hosted under a main directory (``BASE_DIR/sites`` by default), to override it, provide ``POLLA_SITES_DIR`` in your ``settings.py``
+Every site-specific feature (template, urls, static file) is hosted under a main directory (``BASE_DIR/sites`` by default), to override it, provide ``AIRAVATA_SITES_DIR`` in your ``settings.py``
 
-POLLA_REPLACE_DOTS_IN_DOMAINS
+AIRAVATA_REPLACE_DOTS_IN_DOMAINS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This setting is set to ``False`` by default. For people wanting to use Airavata as a drop-in replacement for ``dynamicsites`` or who would like to use the **Urls** feature, you shoud set it to ``True``.
 
-Setting ``POLLA_REPLACE_DOTS_IN_DOMAINS`` will change the default behaviour when it comes to looking for site specific features.
+Setting ``AIRAVATA_REPLACE_DOTS_IN_DOMAINS`` will change the default behaviour when it comes to looking for site specific features.
 
-e.g: you are trying to load a template named ``base.html`` for the site ``example.com``. having ``POLLA_REPLACE_DOTS_IN_DOMAINS`` set to ``True`` django will try looking for it under ``sites/example_com/templates/base.html`` instead of the default ``sites/example.com/templates/base.html``
+e.g: you are trying to load a template named ``base.html`` for the site ``example.com``. having ``AIRAVATA_REPLACE_DOTS_IN_DOMAINS`` set to ``True`` django will try looking for it under ``sites/example_com/templates/base.html`` instead of the default ``sites/example.com/templates/base.html``
 
 .. note::
     In any case directory names are lower-case
@@ -48,7 +48,7 @@ e.g: you are trying to load a template named ``base.html`` for the site ``exampl
 TemplateLoader
 --------------
 
-Airavata provides a TemplateLoader allowing you to load different templates according to the requested host. Specific templates should be placed under the directory configured in ``POLLA_SITES_DIR`` under a sub-directory corresponding to the main domain name (the domain name in ``Site``).
+Airavata provides a TemplateLoader allowing you to load different templates according to the requested host. Specific templates should be placed under the directory configured in ``AIRAVATA_SITES_DIR`` under a sub-directory corresponding to the main domain name (the domain name in ``Site``).
 
 To enable Airavata's template loader, you have to make the following changes to your settings.py:
 ::
@@ -121,7 +121,7 @@ UrlPatterns
 -----------
 
 .. note::
-    To use this feature, make sure you set ``POLLA_REPLACE_DOTS_IN_DOMAINS`` to ``True`` in your ``settings.py``
+    To use this feature, make sure you set ``AIRAVATA_REPLACE_DOTS_IN_DOMAINS`` to ``True`` in your ``settings.py``
     On Python 2 also make sure to include ``__init__.py`` in both ``sites`` and it's sub_directory
 
 Airavata allows you to define different urlpatterns for specific domains. To use this feature, update your main ``urls.py`` to look like this

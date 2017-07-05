@@ -25,7 +25,7 @@ class Loader(BaseLoader):
             return False
 
         try:
-            return safe_join(settings.POLLA_SITES_DIR, current, 'templates', template_name)
+            return safe_join(settings.AIRAVATA_SITES_DIR, current, 'templates', template_name)
         except SuspiciousFileOperation:
             return False
 

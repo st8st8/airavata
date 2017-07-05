@@ -16,7 +16,7 @@ class SiteFinder(FileSystemFinder):
         self.storages = OrderedDict()
         for site in Site.objects.all():
             current = get_domain_path(site.domain)
-            root = os.path.join(settings.POLLA_SITES_DIR, current, 'static')
+            root = os.path.join(settings.AIRAVATA_SITES_DIR, current, 'static')
             if os.path.exists(root) and (current, root) not in self.locations:
                 self.locations.append((current, root))
 

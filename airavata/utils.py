@@ -81,7 +81,7 @@ def get_current_site(request=None):
 ## Loaders
 
 def get_domain_path(domain):
-    if settings.POLLA_REPLACE_DOTS_IN_DOMAINS:
+    if settings.AIRAVATA_REPLACE_DOTS_IN_DOMAINS:
         domain = domain.replace('.', '_')
     return domain.lower()
 

@@ -12,7 +12,7 @@ register = template.Library()
 
 def static(path):
     site_path = get_current_path()
-    if os.path.exists(os.path.join(settings.POLLA_SITES_DIR, site_path, 'static', path)):
+    if os.path.exists(os.path.join(settings.AIRAVATA_SITES_DIR, site_path, 'static', path)):
         return staticfiles_storage.url(os.path.join(site_path, path))
     return staticfiles_storage.url(path)
 

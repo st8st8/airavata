@@ -7,13 +7,13 @@ from .exceptions import NoRequestFound
 from django.conf import settings
 
 
-POLLA_PATCHED_RESOLVER = False
+AIRAVATA_PATCHED_RESOLVER = False
 
 class UrlPatterns(object):
 
     def __init__(self, defaults=[]):
-        if not settings.POLLA_REPLACE_DOTS_IN_DOMAINS:
-            raise ImproperlyConfigured("POLLA_REPLACE_DOTS_IN_DOMAINS needs to be set to True in order to use this functionality")
+        if not settings.AIRAVATA_REPLACE_DOTS_IN_DOMAINS:
+            raise ImproperlyConfigured("AIRAVATA_REPLACE_DOTS_IN_DOMAINS needs to be set to True in order to use this functionality")
         self.defaults = defaults
         self.extras = []
 
@@ -93,9 +93,9 @@ class UrlPatterns(object):
         to_reverse = list(self.get_current_urls())
         return reversed(to_reverse)
 
-if not POLLA_PATCHED_RESOLVER:
+if not AIRAVATA_PATCHED_RESOLVER:
     from .utils import get_resolver, get_ns_resolver
     from django.core import urlresolvers
     urlresolvers.get_resolver = get_resolver
     urlresolvers.get_ns_resolver = get_ns_resolver
-    POLLA_PATCHED_RESOLVER = True
+    AIRAVATA_PATCHED_RESOLVER = True

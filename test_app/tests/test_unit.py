@@ -68,11 +68,11 @@ class Pagetest(TestCase):
 class UtilsTest(TestCase):
 
     def test_dont_replace_dots_get_domain_path(self):
-        with self.settings(POLLA_REPLACE_DOTS_IN_DOMAINS=False):
+        with self.settings(AIRAVATA_REPLACE_DOTS_IN_DOMAINS=False):
             self.assertEqual(get_domain_path('exAmple.com'), 'example.com')
 
     def test_replace_dots_get_domain_path(self):
-        with self.settings(POLLA_REPLACE_DOTS_IN_DOMAINS=True):
+        with self.settings(AIRAVATA_REPLACE_DOTS_IN_DOMAINS=True):
             self.assertEqual(get_domain_path('exAmple.com'), 'example_com')
 
 
