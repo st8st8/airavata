@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 
 from django.contrib.sites.models import Site
+from django.contrib.sites import shortcuts
 from ...models import SiteAlias
 
 
