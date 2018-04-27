@@ -44,15 +44,20 @@ def domain_available(obj, site_klass):
 
 def _get_host(request=None):
     if request is None:
-        if 'airavata.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+        if 'airavata.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE:
             from threadlocals.threadlocals import get_thread_variable
             host = get_thread_variable('requested_host')
             if host is None:
                 raise NoRequestFound("HostName could not be retrieved")
-            return host
+            domain_host = host
         else:
             raise ImproperlyConfigured("You should either provide a request or install threadlocals")
-    domain_host, domain_port = split_domain_port(request.get_host())
+    else:
+        domain_host, domain_port = split_domain_port(request.get_host())
+
+    if settings.ENV_HOSTNAMES and domain_host in settings.ENV_HOSTNAMES:
+        domain_host = settings.ENV_HOSTNAMES[domain_host]
+
     return domain_host
 
 
@@ -70,12 +75,15 @@ def get_current_site(request=None):
     if apps.is_installed('django.contrib.sites'):
         from .models import Site
         if not hasattr(settings, 'SITE_ID') and request is None:
-            return _get_site_by_request(Site.objects, request)
+            ret = _get_site_by_request(Site.objects, request)
         else:
-            return Site.objects.get_current(request)
+            ret = Site.objects.get_current(request)
     else:
         from django.contrib.sites.requests import RequestSite
-        return RequestSite(request)
+        ret = RequestSite(request)
+
+    ret.folder_name = get_domain_path(ret.domain)
+    return ret
 
 
 ## Loaders

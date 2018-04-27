@@ -4,6 +4,7 @@ from collections import OrderedDict
 from django.contrib.staticfiles.finders import FileSystemFinder, BaseFinder
 from django.core.files.storage import FileSystemStorage
 from django.contrib.sites.models import Site
+from django.contrib.sites import shortcuts
 from django.conf import settings
 
 from airavata.utils import get_domain_path

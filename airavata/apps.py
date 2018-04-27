@@ -14,7 +14,7 @@ class PollaAppConfig(AppConfig):
         load_settings(airavata_settings)
 
         from django.conf import settings
-        if 'airavata.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE_CLASSES:
+        if 'airavata.middleware.ThreadLocalMiddleware' in settings.MIDDLEWARE:
             from .utils import get_current_site
             from django.contrib.sites import shortcuts
             shortcuts.get_current_site = get_current_site
