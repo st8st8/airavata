@@ -14,7 +14,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='airavata',
-    version='1.0.0',
+    version='1.1.0',
     packages=['airavata', 'airavata.management.commands', 'airavata.management',
               'airavata.templatetags', 'airavata.migrations'],
     include_package_data=True,
@@ -39,5 +39,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
-    install_requires=['Django>=1.8', 'django-allowedsites']
+    install_requires=['Django>=1.11', 'django-allowedsites']
 )

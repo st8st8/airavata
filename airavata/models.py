@@ -11,7 +11,8 @@ from .utils import domain_available
 @python_2_unicode_compatible
 class SiteAlias(models.Model):
 
-    site = models.ForeignKey(Site, verbose_name=_('site'), related_name='aliases')
+    site = models.ForeignKey(Site, verbose_name=_('site'), related_name='aliases',
+                             on_delete=models.CASCADE)
     domain = models.CharField(_('domain name alias'), max_length=100, unique=True,
                               validators=[ _simple_domain_name_validator])
 

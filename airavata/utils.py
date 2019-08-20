@@ -64,13 +64,17 @@ def _get_host(request=None):
 def _get_site_by_request(self, request=None):
     from django.contrib.sites.models import SITE_CACHE
     host = _get_host(request)
+
+    if settings.ENV_HOSTNAMES and host in settings.ENV_HOSTNAMES:
+        host = settings.ENV_HOSTNAMES[host]
+
     # Looking for domain in django.contib.site.Site and airavata.SiteAlias
     if host not in SITE_CACHE:
       site = self.get(Q(domain__iexact=host) | Q(aliases__domain__iexact=host))
       SITE_CACHE[host] = site
     return SITE_CACHE[host]
 
-
+# I think this is monkey patched - there is no need - I can call this directly...
 def get_current_site(request=None):
     if apps.is_installed('django.contrib.sites'):
         from .models import Site
